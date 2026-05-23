@@ -1,10 +1,11 @@
 from typing import List, Dict, Any, Optional
 from datetime import date
 from backend.models import Field, Crop, Harvest
-from backend.repository import InMemoryRepository
+from backend.repository.repository_interface import IRepository
+from backend.services.service_interface import IFarmService
 
-class FarmService:
-    def __init__(self, repo: InMemoryRepository):
+class FarmService(IFarmService):
+    def __init__(self, repo: IRepository):
         self.repo = repo
 
     # Field CRUD

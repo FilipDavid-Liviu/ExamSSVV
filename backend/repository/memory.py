@@ -1,7 +1,8 @@
 from typing import List, Optional
 from backend.models import Field, Crop, Harvest
+from backend.repository.repository_interface import IRepository
 
-class InMemoryRepository:
+class InMemoryRepository(IRepository):
     def __init__(self):
         self.fields: dict[int, Field] = {}
         self.crops: dict[int, Crop] = {}
