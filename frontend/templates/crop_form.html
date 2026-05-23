@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{% if crop %}Edit Crop{% else %}New Crop{% endif %} - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header>
+        <h2>{% if crop %}Edit Crop{% else %}Register New Crop{% endif %}</h2>
+    </header>
+    <form action="{% if crop %}/crops/{{ crop.id }}/update{% else %}/crops{% endif %}" method="post">
+        <label for="name">Name
+            <input type="text" name="name" id="name" value="{% if crop %}{{ crop.name }}{% endif %}" required>
+        </label>
+
+        <label for="expected_yield_per_hectare">Expected Yield (Per Hectare)
+            <input type="number" step="0.1" min="0" name="expected_yield_per_hectare" id="expected_yield_per_hectare" value="{% if crop %}{{ crop.expected_yield_per_hectare }}{% endif %}" required>
+        </label>
+
+        <label for="season">Season
+            <input type="text" name="season" id="season" value="{% if crop %}{{ crop.season }}{% endif %}" required>
+        </label>
+
+        <button type="submit">{% if crop %}Update Crop{% else %}Create Crop{% endif %}</button>
+    </form>
+</article>
+{% endblock %}

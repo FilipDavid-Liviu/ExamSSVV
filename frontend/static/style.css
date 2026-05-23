@@ -1,0 +1,97 @@
+:root {
+    /* PRIMARY GREEN */
+    --farm-primary: #6b8e23; 
+    --farm-primary-hover: #556b2f; 
+    --farm-primary-text: #fff;
+    
+    /* PALE WARM YELLOW BACKGROUND */
+    --farm-bg-color: #fcfbf4;
+    
+    /* PALE MAROON FOR CONTRAST BUTTONS*/
+    --farm-contrast: #9e5b5b;
+    --farm-contrast-hover: #804343;
+    --farm-contrast-text: #ffffff;
+}
+
+/* Enforce the background color */
+body, html { 
+    background-color: var(--farm-bg-color) !important;
+}
+
+body {
+    padding-top: 1rem; 
+}
+
+.container { max-width: 1000px; }
+
+/* Navigation styling */
+header nav {
+    border-bottom: 2px solid #e0dfd5;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+header nav a {
+    color: var(--farm-primary-hover) !important;
+}
+
+/* Force Table and Header Text Color */
+h1, h2, h3, h4, h5, h6, strong {
+    color: var(--farm-primary) !important;
+}
+
+/* Action Buttons Standardization */
+.action-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.action-form {
+    margin: 0;
+    display: inline-flex;
+}
+
+.action-btn {
+    margin: 0 !important;
+    padding: 0.25rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    height: 34px !important;
+    line-height: 1.5 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+/* Explicitly style the Primary/Secondary (Edit/Create) buttons */
+button, 
+[type="submit"], 
+.action-btn.secondary,
+a[role="button"].outline {
+    background-color: var(--farm-primary) !important;
+    color: var(--farm-primary-text) !important;
+    border: 1px solid var(--farm-primary-hover) !important;
+}
+
+button:hover, 
+[type="submit"]:hover, 
+.action-btn.secondary:hover,
+a[role="button"].outline:hover {
+    background-color: var(--farm-primary-hover) !important;
+}
+
+/* Explicitly style the Contrast (Delete) buttons */
+.action-btn.contrast {
+    background-color: var(--farm-contrast) !important;
+    color: var(--farm-contrast-text) !important;
+    border: 1px solid var(--farm-contrast-hover) !important;
+}
+
+.action-btn.contrast:hover {
+    background-color: var(--farm-contrast-hover) !important;
+}

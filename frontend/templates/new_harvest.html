@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}New Harvest - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header>
+        <h2>Register New Harvest</h2>
+    </header>
+    <form action="/harvests" method="post">
+        <label for="field_id">Field
+            <select name="field_id" id="field_id" required>
+                <option value="" disabled selected>Select a field...</option>
+                {% for field in fields %}
+                <option value="{{ field.id }}">{{ field.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label for="crop_id">Crop
+            <select name="crop_id" id="crop_id" required>
+                <option value="" disabled selected>Select a crop...</option>
+                {% for crop in crops %}
+                <option value="{{ crop.id }}">{{ crop.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label for="harvest_date">Harvest Date
+            <input type="date" name="harvest_date" id="harvest_date" required>
+        </label>
+
+        <label for="actual_yield_tons">Actual Yield (Tons)
+            <input type="number" step="0.1" min="0" name="actual_yield_tons" id="actual_yield_tons" placeholder="e.g. 25.5" required>
+        </label>
+
+        <label for="quality_rating">Quality Rating (1-5)
+            <input type="number" min="1" max="5" step="1" name="quality_rating" id="quality_rating" value="3" required>
+        </label>
+
+        <button type="submit">Submit Harvest</button>
+    </form>
+</article>
+{% endblock %}

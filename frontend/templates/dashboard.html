@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header>
+        <h2>Yield Report</h2>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>Crop Name</th>
+                <th>Total Yield (Tons)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in report %}
+            <tr>
+                <td>{{ row.crop_name }}</td>
+                <td>{{ row.total_yield }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">No harvest data available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</article>
+{% endblock %}

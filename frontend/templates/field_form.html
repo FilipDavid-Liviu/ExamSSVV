@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{% if field %}Edit Field{% else %}New Field{% endif %} - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header>
+        <h2>{% if field %}Edit Field{% else %}Register New Field{% endif %}</h2>
+    </header>
+    <form action="{% if field %}/fields/{{ field.id }}/update{% else %}/fields{% endif %}" method="post">
+        <label for="name">Name
+            <input type="text" name="name" id="name" value="{% if field %}{{ field.name }}{% endif %}" required>
+        </label>
+
+        <label for="size_hectares">Size (Hectares)
+            <input type="number" step="0.1" min="0" name="size_hectares" id="size_hectares" value="{% if field %}{{ field.size_hectares }}{% endif %}" required>
+        </label>
+
+        <label for="soil_type">Soil Type
+            <input type="text" name="soil_type" id="soil_type" value="{% if field %}{{ field.soil_type }}{% endif %}" required>
+        </label>
+
+        <button type="submit">{% if field %}Update Field{% else %}Create Field{% endif %}</button>
+    </form>
+</article>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Fields - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0;">All Fields</h2>
+        <a href="/fields/new" role="button" class="outline">Create New Field</a>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Size (Hectares)</th>
+                <th>Soil Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in fields %}
+            <tr>
+                <td>{{ field.id }}</td>
+                <td>{{ field.name }}</td>
+                <td>{{ field.size_hectares }}</td>
+                <td>{{ field.soil_type }}</td>
+                <td>
+                    <div class="action-container">
+                        <a href="/fields/{{ field.id }}/edit" role="button" class="secondary action-btn">Edit</a>
+                        <form action="/fields/{{ field.id }}/delete" method="post" class="action-form">
+                            <button type="submit" class="contrast action-btn" onclick="return confirm('Are you sure you want to delete this field?')">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No fields registered.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</article>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Harvests - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0;">Historical Harvests</h2>
+        <a href="/harvests/new" role="button" class="outline">Register New Harvest</a>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Field</th>
+                <th>Crop</th>
+                <th>Date</th>
+                <th>Yield (Tons)</th>
+                <th>Quality (1-5)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in harvests %}
+            <tr>
+                <td>{{ h.id }}</td>
+                <td>{{ h.field_name }}</td>
+                <td>{{ h.crop_name }}</td>
+                <td>{{ h.harvest_date }}</td>
+                <td>{{ h.actual_yield_tons }}</td>
+                <td>{{ h.quality_rating }}</td>
+                <td>
+                    <div class="action-container">
+                        <a href="/harvests/{{ h.id }}/edit" role="button" class="secondary action-btn">Edit</a>
+                        <form action="/harvests/{{ h.id }}/delete" method="post" class="action-form">
+                            <button type="submit" class="contrast action-btn" onclick="return confirm('Are you sure you want to delete this harvest?')">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7">No harvests registered.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</article>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Crops - Farm System{% endblock %}
+{% block content %}
+<article>
+    <header style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0;">All Crops</h2>
+        <a href="/crops/new" role="button" class="outline">Create New Crop</a>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Expected Yield (Per Hectare)</th>
+                <th>Season</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for crop in crops %}
+            <tr>
+                <td>{{ crop.id }}</td>
+                <td>{{ crop.name }}</td>
+                <td>{{ crop.expected_yield_per_hectare }}</td>
+                <td>{{ crop.season }}</td>
+                <td>
+                    <div class="action-container">
+                        <a href="/crops/{{ crop.id }}/edit" role="button" class="secondary action-btn">Edit</a>
+                        <form action="/crops/{{ crop.id }}/delete" method="post" class="action-form">
+                            <button type="submit" class="contrast action-btn" onclick="return confirm('Are you sure you want to delete this crop?')">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No crops registered.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</article>
+{% endblock %}
