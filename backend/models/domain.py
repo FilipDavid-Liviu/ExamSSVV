@@ -18,5 +18,5 @@ class Harvest(BaseModel):
     field_id: int
     crop_id: int
     harvest_date: date
-    actual_yield_tons: float
+    actual_yield_tons: float = PydanticField(ge=0.0)
     quality_rating: int = PydanticField(ge=1, le=5)
