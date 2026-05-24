@@ -1,24 +1,39 @@
 {% extends "base.html" %}
-{% block title %}{% if crop %}Edit Crop{% else %}New Crop{% endif %} - Farm System{% endblock %}
+{% block title %}{% if crop %}Edit Crop{% else %}Register New Crop{% endif %} - AgriKeep{% endblock %}
 {% block content %}
-<article>
+<article style="max-width: 600px; margin: 0 auto;">
     <header>
-        <h2>{% if crop %}Edit Crop{% else %}Register New Crop{% endif %}</h2>
+        <h2>
+            <i class="bi {% if crop %}bi-pencil-square{% else %}bi-plus-circle-fill{% endif %}" style="color: var(--farm-emerald);"></i>
+            {% if crop %}Edit Crop Varieties{% else %}Register New Crop{% endif %}
+        </h2>
     </header>
     <form action="{% if crop %}/crops/{{ crop.id }}/update{% else %}/crops{% endif %}" method="post">
-        <label for="name">Name
-            <input type="text" name="name" id="name" value="{% if crop %}{{ crop.name }}{% endif %}" required>
+        <label for="name">
+            <span>Crop Name</span>
+            <input type="text" name="name" id="name" placeholder="e.g. Wheat, Barley, Clover" value="{% if crop %}{{ crop.name }}{% endif %}" required>
         </label>
 
-        <label for="expected_yield_per_hectare">Expected Yield (Per Hectare)
-            <input type="number" step="0.1" min="0" name="expected_yield_per_hectare" id="expected_yield_per_hectare" value="{% if crop %}{{ crop.expected_yield_per_hectare }}{% endif %}" required>
+        <label for="expected_yield_per_hectare">
+            <span>Expected Yield (Tons Per Hectare)</span>
+            <input type="number" step="0.1" min="0" name="expected_yield_per_hectare" id="expected_yield_per_hectare" placeholder="e.g. 4.5" value="{% if crop %}{{ crop.expected_yield_per_hectare }}{% endif %}" required>
         </label>
 
-        <label for="season">Season
-            <input type="text" name="season" id="season" value="{% if crop %}{{ crop.season }}{% endif %}" required>
+        <label for="season">
+            <span>Preferred Planting Season</span>
+            <input type="text" name="season" id="season" placeholder="e.g. Spring, Autumn" value="{% if crop %}{{ crop.season }}{% endif %}" required>
         </label>
 
-        <button type="submit">{% if crop %}Update Crop{% else %}Create Crop{% endif %}</button>
+        <button type="submit">
+            <i class="bi bi-check-lg"></i> {% if crop %}Update Crop{% else %}Create Crop{% endif %}
+        </button>
     </form>
+    
+    <div style="text-align: center; margin-top: 1.5rem; border-top: 1px solid #f2f6f3; padding-top: 1rem;">
+        <a href="/crops" style="color: var(--farm-text-muted); font-size: 0.9rem; text-decoration: none;">
+            <i class="bi bi-arrow-left"></i> Cancel & Return to Crops List
+        </a>
+    </div>
 </article>
 {% endblock %}
+

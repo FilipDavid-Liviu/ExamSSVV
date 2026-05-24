@@ -1,50 +1,285 @@
+/* ==========================================================================
+   AGRIKEEP - MODERN DESIGN SYSTEM & STYLE Overwrite
+   Nature & Earth-inspired UI theme for crop management.
+   ========================================================================== */
+
+/* --- Modern Styling Variables Overriding Pico CSS v2 --- */
 :root {
-    /* PRIMARY GREEN */
-    --farm-primary: #6b8e23; 
-    --farm-primary-hover: #556b2f; 
-    --farm-primary-text: #fff;
-    
-    /* PALE WARM YELLOW BACKGROUND */
-    --farm-bg-color: #fcfbf4;
-    
-    /* PALE MAROON FOR CONTRAST BUTTONS*/
-    --farm-contrast: #9e5b5b;
-    --farm-contrast-hover: #804343;
-    --farm-contrast-text: #ffffff;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+
+    /* BRANDING PALETTE (Nature & Soil) */
+    --farm-forest: #1b4332;       /* Deep branding green */
+    --farm-emerald: #2d6a4f;      /* Primary controls & accents */
+    --farm-emerald-hover: #40916c;/* Light primary hover */
+    --farm-sage: #52b788;         /* Subtler UI states */
+    --farm-mint: #e8f5e9;         /* Very soft green background elements */
+    --farm-bg: #f5f8f6;           /* Premium soft slate-mint background */
+    --farm-surface: #ffffff;      /* Pure white for card elements */
+    --farm-text-main: #2d3732;    /* Dark organic carbon for readability */
+    --farm-text-muted: #627269;   /* Muted gray-green for subtexts */
+
+    /* HIGHLIGHTS & CONTRAST */
+    --farm-gold: #f4a261;         /* Warm golden crop yield / star rating */
+    --farm-gold-light: #fef1e6;   /* Soft glow amber */
+    --farm-clay: #b56576;         /* Earth clay red for warnings/delete */
+    --farm-clay-hover: #9e5a68;
+
+    /* PICO INTERNALS OVERRIDES */
+    --pico-font-family: var(--font-body);
+    --pico-font-family-sans-serif: var(--font-body);
+    --pico-primary: var(--farm-emerald);
+    --pico-primary-background: var(--farm-emerald);
+    --pico-primary-hover: var(--farm-forest);
+    --pico-background-color: var(--farm-bg);
+    --pico-card-background-color: var(--farm-surface);
+    --pico-card-box-shadow: 0 10px 30px -5px rgba(27, 67, 50, 0.04), 0 5px 15px -3px rgba(0, 0, 0, 0.02);
+    --pico-border-radius: 16px;
+    --pico-border-color: #e3ebec;
+    --pico-color: var(--farm-text-main);
 }
 
-/* Enforce the background color */
-body, html { 
-    background-color: var(--farm-bg-color) !important;
-}
-
+/* Base Body Enhancements */
 body {
-    padding-top: 1rem; 
+    background-color: var(--farm-bg) !important;
+    color: var(--farm-text-main) !important;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
-.container { max-width: 1000px; }
-
-/* Navigation styling */
-header nav {
-    border-bottom: 2px solid #e0dfd5;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+/* --- Layout Structure --- */
+.main-header {
+    background-color: rgba(245, 248, 246, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(227, 235, 236, 0.6);
 }
 
-header nav a {
-    color: var(--farm-primary-hover) !important;
+.header-container {
+    padding: 0 1rem;
 }
 
-/* Force Table and Header Text Color */
-h1, h2, h3, h4, h5, h6, strong {
-    color: var(--farm-primary) !important;
+.glass-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0 !important;
 }
 
-/* Action Buttons Standardization */
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none !important;
+    color: var(--farm-forest) !important;
+    transition: transform 0.2s ease;
+}
+
+.brand-link:hover {
+    transform: scale(1.02);
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+    color: var(--farm-emerald);
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--farm-text-muted) !important;
+    text-decoration: none !important;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.25s ease;
+}
+
+.nav-item i {
+    font-size: 1.1rem;
+}
+
+.nav-item:hover {
+    color: var(--farm-emerald) !important;
+    background-color: var(--farm-mint);
+}
+
+/* Active Nav State detection based on current URL path */
+/* Managed cleanly via hover & focus in simple environments */
+
+.container {
+    max-width: 1400px !important;
+    width: 95% !important;
+    box-sizing: border-box;
+}
+
+.main-content {
+    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    max-width: 1400px !important;
+}
+
+.main-footer {
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--farm-text-muted);
+    border-top: 1px solid rgba(227, 235, 236, 0.6);
+    background-color: var(--farm-surface);
+}
+
+.main-footer p {
+    margin: 0;
+}
+
+/* --- Card (Article) Styling --- */
+article {
+    border: 1px solid rgba(227, 235, 236, 0.7) !important;
+    background: var(--farm-surface) !important;
+    border-radius: var(--pico-border-radius) !important;
+    box-shadow: var(--pico-card-box-shadow) !important;
+    overflow: hidden;
+    padding: 2rem !important;
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--farm-emerald), var(--farm-sage));
+}
+
+article header {
+    background-color: transparent !important;
+    border-bottom: 1px solid #f0f5f2 !important;
+    margin: -2rem -2rem 1.5rem -2rem !important;
+    padding: 1.5rem 2rem !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+article header h2 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--farm-forest) !important;
+    margin: 0 !important;
+    font-size: 1.6rem;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Typography Customizations */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    color: var(--farm-forest) !important;
+}
+
+/* --- Modern Interactive Buttons --- */
+button,
+[type="submit"],
+.action-btn.secondary,
+a[role="button"] {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    padding: 0.65rem 1.25rem !important; /* Touch target optimized size */
+    border-radius: 10px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem;
+    box-shadow: 0 4px 10px rgba(45, 106, 79, 0.15) !important;
+    min-height: 42px; /* Touch target safety standard */
+}
+
+/* Default / Primary */
+button,
+[type="submit"] {
+    background-color: var(--farm-emerald) !important;
+    color: #ffffff !important;
+}
+
+button:hover,
+[type="submit"]:hover {
+    background-color: var(--farm-forest) !important;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 14px rgba(27, 67, 50, 0.25) !important;
+}
+
+button:active,
+[type="submit"]:active {
+    transform: translateY(0.5px);
+}
+
+/* Outlined navigation/action button (e.g. Create New) */
+a[role="button"].outline {
+    background-color: transparent !important;
+    color: var(--farm-emerald) !important;
+    border: 2px solid var(--farm-emerald) !important;
+    box-shadow: none !important;
+}
+
+a[role="button"].outline:hover {
+    background-color: var(--farm-emerald) !important;
+    color: #ffffff !important;
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 10px rgba(45, 106, 79, 0.15) !important;
+}
+
+/* Action Container Grid inside Tables */
 .action-container {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     align-items: center;
+    white-space: nowrap; /* Prevent button elements wrapping to two lines */
+    flex-wrap: nowrap;
 }
 
 .action-form {
@@ -53,45 +288,490 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 .action-btn {
-    margin: 0 !important;
-    padding: 0.25rem 0.75rem !important;
-    font-size: 0.875rem !important;
     height: 34px !important;
-    line-height: 1.5 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    border: none !important;
-    border-radius: 4px !important;
-    text-decoration: none !important;
-    cursor: pointer !important;
+    min-height: 34px !important;
+    padding: 0 0.8rem !important;
+    font-size: 0.825rem !important;
+    border-radius: 6px !important;
 }
 
-/* Explicitly style the Primary/Secondary (Edit/Create) buttons */
-button, 
-[type="submit"], 
-.action-btn.secondary,
-a[role="button"].outline {
-    background-color: var(--farm-primary) !important;
-    color: var(--farm-primary-text) !important;
-    border: 1px solid var(--farm-primary-hover) !important;
+/* Action: Edit (Secondary) */
+.action-btn.secondary {
+    background-color: var(--farm-mint) !important;
+    color: var(--farm-emerald) !important;
+    border: 1px solid rgba(45, 106, 79, 0.2) !important;
+    box-shadow: none !important;
 }
 
-button:hover, 
-[type="submit"]:hover, 
-.action-btn.secondary:hover,
-a[role="button"].outline:hover {
-    background-color: var(--farm-primary-hover) !important;
+.action-btn.secondary:hover {
+    background-color: var(--farm-emerald) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
 }
 
-/* Explicitly style the Contrast (Delete) buttons */
+/* Action: Delete (Contrast) */
 .action-btn.contrast {
-    background-color: var(--farm-contrast) !important;
-    color: var(--farm-contrast-text) !important;
-    border: 1px solid var(--farm-contrast-hover) !important;
+    background-color: rgba(181, 101, 118, 0.1) !important;
+    color: var(--farm-clay) !important;
+    border: 1px solid rgba(181, 101, 118, 0.2) !important;
+    box-shadow: none !important;
 }
 
 .action-btn.contrast:hover {
-    background-color: var(--farm-contrast-hover) !important;
+    background-color: var(--farm-clay) !important;
+    color: #ffffff !important;
+    border-color: var(--farm-clay) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(181, 101, 118, 0.2) !important;
 }
+
+/* --- Styled Tables --- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0.5rem;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 0 !important; /* Managed by wrapper margin */
+}
+
+th {
+    background-color: #f7faf8 !important;
+    color: var(--farm-forest) !important;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem 1.25rem !important;
+    border-bottom: 2px solid #eef3f0 !important;
+    text-align: left;
+}
+
+th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+td {
+    padding: 1.1rem 1.25rem !important;
+    border-bottom: 1px solid #f2f6f3 !important;
+    vertical-align: middle;
+    font-size: 0.95rem;
+    color: var(--farm-text-main);
+    transition: background-color 0.2s ease;
+}
+
+tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* Hover Row Highlight */
+tbody tr {
+    transition: all 0.2s ease;
+}
+
+tbody tr:hover td {
+    background-color: rgba(82, 183, 136, 0.03) !important;
+}
+
+tbody tr:hover {
+    transform: scale(1.002);
+}
+
+/* Table empty state fallback */
+tbody td[colspan] {
+    text-align: center;
+    padding: 2.5rem !important;
+    color: var(--farm-text-muted);
+    font-style: italic;
+    background-color: #fafbfa;
+}
+
+/* --- Badges & Tags --- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Prevent badge layout text wrapping */
+}
+
+/* Soil Types colors */
+.badge-clay { background-color: #fceade; color: #a0522d; border: 1px solid rgba(160, 82, 45, 0.15); }
+.badge-sandy { background-color: #fef6e4; color: #d4a373; border: 1px solid rgba(212, 163, 115, 0.15); }
+.badge-silty { background-color: #edf2fb; color: #4a5759; border: 1px solid rgba(74, 87, 89, 0.15); }
+.badge-peaty { background-color: #f1ebd9; color: #5c5549; border: 1px solid rgba(92, 85, 73, 0.15); }
+.badge-loamy { background-color: #e8f5e9; color: #2e7d32; border: 1px solid rgba(46, 125, 50, 0.15); }
+.badge-default { background-color: #f0f2f5; color: #4e5969; border: 1px solid rgba(78, 89, 105, 0.15); }
+
+/* Seasons badges */
+.badge-spring { background-color: #e8f5e9; color: #2e7d32; }
+.badge-summer { background-color: #fff9db; color: #f59f00; }
+.badge-autumn { background-color: #ffe8cc; color: #f76707; }
+.badge-winter { background-color: #e3fafc; color: #0c8599; }
+
+/* Stars rating badge */
+.quality-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1rem;
+    font-weight: 700;
+    color: var(--farm-gold);
+    background-color: var(--farm-gold-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(244, 162, 97, 0.2);
+    white-space: nowrap;
+}
+
+.quality-indicator i {
+    font-size: 0.9rem;
+}
+
+/* Hectares / Yield Metrics Unit */
+.metric-value {
+    font-weight: 700;
+    color: var(--farm-forest);
+    font-size: 1.05rem;
+}
+
+.metric-unit {
+    color: var(--farm-text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 0.15rem;
+}
+
+/* --- Form Fields & Inputs --- */
+form label {
+    font-weight: 600;
+    color: var(--farm-forest) !important;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    display: block;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form select {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem !important;
+    border-radius: 10px !important;
+    border: 1px solid #ccd8d2 !important;
+    background-color: #ffffff !important;
+    color: var(--farm-text-main) !important;
+    transition: all 0.2s ease !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+    margin-bottom: 1.25rem !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Dynamic arrow safety layout for select inputs in Chrome/Safari/Firefox */
+form select {
+    padding-right: 2.2rem !important; /* Ensure content never clips select arrows */
+}
+
+form input:focus,
+form select:focus {
+    border-color: var(--farm-emerald) !important;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+    outline: none !important;
+}
+
+form button[type="submit"] {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.8rem !important;
+}
+
+/* --- Dashboard & Metrics Cards --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Fluid wrap for narrow mobile viewports */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background: var(--farm-surface);
+    border-radius: var(--pico-border-radius);
+    padding: 1.5rem;
+    border: 1px solid rgba(227, 235, 236, 0.7);
+    box-shadow: var(--pico-card-box-shadow);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: transform 0.25s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+}
+
+.metric-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.metric-icon-box.green { background-color: #e8f5e9; color: var(--farm-emerald); }
+.metric-icon-box.gold { background-color: var(--farm-gold-light); color: var(--farm-gold); }
+.metric-icon-box.blue { background-color: #e3fafc; color: #0c8599; }
+
+.metric-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-info .label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--farm-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-info .number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--farm-forest);
+    line-height: 1.2;
+    font-family: var(--font-heading);
+}
+
+/* Dynamic Yield Analytics visual indicators */
+.progress-bar-container {
+    width: 100%;
+    background-color: #eef3f0;
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--farm-sage), var(--farm-emerald));
+}
+
+/* --- Animations --- */
+.animate-fade-in {
+    animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .glass-nav {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+    
+    .nav-item span {
+        display: none; /* Hide labels on mobile, keep icons */
+    }
+    
+    .nav-item {
+        padding: 0.6rem 0.9rem;
+    }
+    
+    article {
+        padding: 1rem !important;
+    }
+    
+    article header {
+        margin: -1rem -1rem 1rem -1rem !important;
+        padding: 0.85rem 1rem !important;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    article header h2 {
+        justify-content: center;
+        font-size: 1.35rem;
+    }
+    
+    article header a[role="button"] {
+        width: 100%;
+        margin-top: 0.25rem;
+    }
+    
+    /* Morph standard tables into beautiful mobile stacked cards */
+    .table-responsive {
+        margin-top: 0.25rem;
+        background-color: transparent !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+    }
+    
+    table, thead, tbody, th, td, tr { 
+        display: block !important; 
+        width: 100% !important;
+    }
+    
+    /* Hide traditional table headers on mobile viewports */
+    thead tr { 
+        position: absolute !important;
+        top: -9999px !important;
+        left: -9999px !important;
+    }
+    
+    /* Style rows as individual cards */
+    tbody tr {
+        margin-bottom: 1.25rem !important;
+        padding: 1.1rem !important;
+        border: 1px solid rgba(227, 235, 236, 0.8) !important;
+        border-radius: 12px !important;
+        background-color: #fafbfa !important;
+        box-shadow: 0 4px 10px rgba(27, 67, 50, 0.02) !important;
+        position: relative !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+        box-sizing: border-box !important;
+    }
+    
+    tbody tr:hover {
+        transform: translateY(-1.5px) !important;
+        box-shadow: 0 6px 14px rgba(27, 67, 50, 0.04) !important;
+    }
+    
+    /* Style cells as neat rows inside the card */
+    td { 
+        border: none !important;
+        border-bottom: 1px solid #f1f5f2 !important; 
+        position: relative !important;
+        padding: 0.75rem 0.25rem 0.75rem 40% !important; /* Give left side padding for header label */
+        text-align: right !important;
+        min-height: 46px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        box-sizing: border-box !important;
+        font-size: 0.875rem !important;
+    }
+    
+    td:last-child {
+        border-bottom: none !important;
+        padding-bottom: 0.25rem !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Inject bold descriptive column labels dynamically from HTML data-label tags */
+    td::before { 
+        content: attr(data-label) !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 0.5rem !important;
+        transform: translateY(-50%) !important;
+        width: 35% !important; 
+        white-space: nowrap !important;
+        text-align: left !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 700 !important;
+        color: var(--farm-forest) !important;
+        font-size: 0.75rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+    
+    /* Action Buttons fit comfortably inside Mobile Cards side-by-side */
+    .action-btn span {
+        display: inline-block !important; /* Keep text descriptors visible on mobile cards! */
+    }
+    
+    .action-btn {
+        width: auto !important;
+        height: 34px !important;
+        min-height: 34px !important;
+        padding: 0 0.85rem !important;
+        border-radius: 8px !important;
+        font-size: 0.8rem !important;
+        display: inline-flex !important;
+    }
+    
+    .action-container {
+        gap: 0.4rem;
+        justify-content: flex-end !important;
+        width: auto !important;
+    }
+    
+    /* Badges & Rating indicators responsive tweaks inside cards */
+    .badge {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.725rem;
+    }
+    
+    .quality-indicator {
+        padding: 0.15rem 0.45rem;
+        font-size: 0.775rem;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-item {
+        padding: 0.5rem 0.6rem;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .action-btn span {
+        display: none !important; /* Only hide text on extremely narrow viewports (under 380px) */
+    }
+    
+    .action-btn {
+        width: 36px !important;
+        padding: 0 !important;
+    }
+}
+
+
+

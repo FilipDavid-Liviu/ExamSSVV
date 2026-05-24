@@ -3,26 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Agricultural Farm System{% endblock %}</title>
+    <title>{% block title %}AgriKeep - Crop & Field Management{% endblock %}</title>
+    <!-- Modern Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons for premium agronomy iconography -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header class="container">
-        <nav>
-            <ul>
-                <li><strong style="font-size: 1.2rem;">Farm Management</strong></li>
-            </ul>
-            <ul>
-                <li><a href="/">Dashboard</a></li>
-                <li><a href="/fields">Fields</a></li>
-                <li><a href="/crops">Crops</a></li>
-                <li><a href="/harvests">Harvests</a></li>
-            </ul>
-        </nav>
+    <header class="main-header">
+        <div class="container header-container">
+            <nav class="glass-nav">
+                <div class="nav-brand">
+                    <a href="/" class="brand-link">
+                        <span class="logo-icon"><i class="bi bi-sprout-fill"></i></span>
+                        <span class="logo-text">AgriKeep</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/" class="nav-item"><i class="bi bi-columns-gap"></i> <span>Dashboard</span></a></li>
+                    <li><a href="/fields" class="nav-item"><i class="bi bi-geo-alt"></i> <span>Fields</span></a></li>
+                    <li><a href="/crops" class="nav-item"><i class="bi bi-flower1"></i> <span>Crops</span></a></li>
+                    <li><a href="/harvests" class="nav-item"><i class="bi bi-calendar2-check"></i> <span>Harvests</span></a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main class="container">
+    <main class="container main-content animate-fade-in">
         {% block content %}{% endblock %}
     </main>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 AgriKeep &bull; Smart Agricultural Systems. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
+
