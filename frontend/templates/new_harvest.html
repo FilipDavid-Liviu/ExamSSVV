@@ -1,42 +1,59 @@
 {% extends "base.html" %}
-{% block title %}New Harvest - Farm System{% endblock %}
+{% block title %}Register Harvest - AgriKeep{% endblock %}
 {% block content %}
-<article>
+<article style="max-width: 600px; margin: 0 auto;">
     <header>
-        <h2>Register New Harvest</h2>
+        <h2>
+            <i class="bi bi-calendar-plus-fill" style="color: var(--farm-emerald);"></i>
+            Register New Harvest
+        </h2>
     </header>
     <form action="/harvests" method="post">
-        <label for="field_id">Field
+        <label for="field_id">
+            <span>Select Cultivated Field</span>
             <select name="field_id" id="field_id" required>
-                <option value="" disabled selected>Select a field...</option>
+                <option value="" disabled selected>Select field...</option>
                 {% for field in fields %}
-                <option value="{{ field.id }}">{{ field.name }}</option>
+                <option value="{{ field.id }}">{{ field.name }} ({{ field.size_hectares }} ha - {{ field.soil_type }} soil)</option>
                 {% endfor %}
             </select>
         </label>
 
-        <label for="crop_id">Crop
+        <label for="crop_id">
+            <span>Select Harvested Crop</span>
             <select name="crop_id" id="crop_id" required>
-                <option value="" disabled selected>Select a crop...</option>
+                <option value="" disabled selected>Select crop...</option>
                 {% for crop in crops %}
-                <option value="{{ crop.id }}">{{ crop.name }}</option>
+                <option value="{{ crop.id }}">{{ crop.name }} ({{ crop.season }} variety)</option>
                 {% endfor %}
             </select>
         </label>
 
-        <label for="harvest_date">Harvest Date
+        <label for="harvest_date">
+            <span>Harvest Record Date</span>
             <input type="date" name="harvest_date" id="harvest_date" required>
         </label>
 
-        <label for="actual_yield_tons">Actual Yield (Tons)
-            <input type="number" step="0.1" min="0" name="actual_yield_tons" id="actual_yield_tons" placeholder="e.g. 25.5" required>
+        <label for="actual_yield_tons">
+            <span>Actual Yield Quantity (Tons)</span>
+            <input type="number" step="0.1" min="0" name="actual_yield_tons" id="actual_yield_tons" placeholder="e.g. 12.4" required>
         </label>
 
-        <label for="quality_rating">Quality Rating (1-5)
+        <label for="quality_rating">
+            <span>Harvest Quality Rating (1 to 5 Stars)</span>
             <input type="number" min="1" max="5" step="1" name="quality_rating" id="quality_rating" value="3" required>
         </label>
 
-        <button type="submit">Submit Harvest</button>
+        <button type="submit">
+            <i class="bi bi-calendar2-check"></i> Submit Harvest Ledger
+        </button>
     </form>
+    
+    <div style="text-align: center; margin-top: 1.5rem; border-top: 1px solid #f2f6f3; padding-top: 1rem;">
+        <a href="/harvests" style="color: var(--farm-text-muted); font-size: 0.9rem; text-decoration: none;">
+            <i class="bi bi-arrow-left"></i> Cancel & Return to Harvests
+        </a>
+    </div>
 </article>
 {% endblock %}
+

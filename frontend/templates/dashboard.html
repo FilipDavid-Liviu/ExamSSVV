@@ -1,29 +1,127 @@
 {% extends "base.html" %}
-{% block title %}Dashboard - Farm System{% endblock %}
+{% block title %}Dashboard - AgriKeep{% endblock %}
 {% block content %}
+
+{# Calculate dynamic analytics via Jinja #}
+{% set vars = namespace(total_yield=0.0, max_yield=1.0) %}
+{% for row in report %}
+    {% set vars.total_yield = vars.total_yield + row.total_yield %}
+    {% if row.total_yield > vars.max_yield %}
+        {% set vars.max_yield = row.total_yield %}
+    {% endif %}
+{% endfor %}
+
+<!-- Dashboard Overview Cards -->
+<div class="dashboard-grid">
+    <div class="metric-card">
+        <div class="metric-icon-box green">
+            <i class="bi bi-flower1"></i>
+        </div>
+        <div class="metric-info">
+            <span class="label">Supported Crops</span>
+            <span class="number">{{ report|length }}</span>
+        </div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-icon-box gold">
+            <i class="bi bi-bucket-fill"></i>
+        </div>
+        <div class="metric-info">
+            <span class="label">Total Yield</span>
+            <span class="number">{{ vars.total_yield|round(1) }} <span style="font-size: 1rem; font-weight: 600; color: var(--farm-text-muted);">Tons</span></span>
+        </div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-icon-box blue">
+            <i class="bi bi-shield-check"></i>
+        </div>
+        <div class="metric-info">
+            <span class="label">System Status</span>
+            <span class="number" style="font-size: 1.25rem; color: #0c8599; display: flex; align-items: center; gap: 0.35rem;">
+                <span class="pulse-dot"></span> Active
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Yield Analytics Card -->
 <article>
     <header>
-        <h2>Yield Report</h2>
+        <h2><i class="bi bi-bar-chart-fill" style="color: var(--farm-emerald);"></i> Yield Report</h2>
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--farm-text-muted); background: var(--farm-mint); padding: 0.25rem 0.75rem; border-radius: 20px;">
+            Live Aggregated Data
+        </span>
     </header>
-    <table>
-        <thead>
-            <tr>
-                <th>Crop Name</th>
-                <th>Total Yield (Tons)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in report %}
-            <tr>
-                <td>{{ row.crop_name }}</td>
-                <td>{{ row.total_yield }}</td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="2">No harvest data available.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Crop Name</th>
+                    <th style="width: 20%; text-align: right;">Total Yield (Tons)</th>
+                    <th style="width: 45%;">Production Scale</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in report %}
+                {% set percentage = (row.total_yield / vars.max_yield) * 100 %}
+                <tr>
+                    <td style="font-weight: 600; color: var(--farm-forest);">
+                        <i class="bi bi-tree" style="margin-right: 0.4rem; color: var(--farm-sage);"></i>
+                        {{ row.crop_name }}
+                    </td>
+                    <td style="text-align: right; font-weight: 700; font-family: var(--font-heading);">
+                        <span class="metric-value">{{ row.total_yield|round(1) }}</span><span class="metric-unit">Tons</span>
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="progress-bar-container" style="flex: 1;">
+                                <div class="progress-bar-fill" style="width: {{ percentage }}%;"></div>
+                            </div>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--farm-text-muted); min-width: 30px; text-align: right;">
+                                {{ percentage|round(0) }}%
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">No harvest data available. Get started by registering a harvest!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </article>
+
+<style>
+/* CSS specific to pulse dot indicator */
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #0c8599;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(12, 133, 153, 0.4);
+    animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(12, 133, 153, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(12, 133, 153, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(12, 133, 153, 0);
+    }
+}
+</style>
+
 {% endblock %}
+

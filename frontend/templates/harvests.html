@@ -1,47 +1,76 @@
 {% extends "base.html" %}
-{% block title %}Harvests - Farm System{% endblock %}
+{% block title %}Harvest History - AgriKeep{% endblock %}
 {% block content %}
 <article>
-    <header style="display: flex; justify-content: space-between; align-items: center;">
-        <h2 style="margin: 0;">Historical Harvests</h2>
-        <a href="/harvests/new" role="button" class="outline">Register New Harvest</a>
+    <header>
+        <h2><i class="bi bi-calendar2-check-fill" style="color: var(--farm-emerald);"></i> Historical Harvests</h2>
+        <a href="/harvests/new" role="button" class="outline">
+            <i class="bi bi-plus-circle"></i> Register New Harvest
+        </a>
     </header>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Field</th>
-                <th>Crop</th>
-                <th>Date</th>
-                <th>Yield (Tons)</th>
-                <th>Quality (1-5)</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for h in harvests %}
-            <tr>
-                <td>{{ h.id }}</td>
-                <td>{{ h.field_name }}</td>
-                <td>{{ h.crop_name }}</td>
-                <td>{{ h.harvest_date }}</td>
-                <td>{{ h.actual_yield_tons }}</td>
-                <td>{{ h.quality_rating }}</td>
-                <td>
-                    <div class="action-container">
-                        <a href="/harvests/{{ h.id }}/edit" role="button" class="secondary action-btn">Edit</a>
-                        <form action="/harvests/{{ h.id }}/delete" method="post" class="action-form">
-                            <button type="submit" class="contrast action-btn" onclick="return confirm('Are you sure you want to delete this harvest?')">Delete</button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="7">No harvests registered.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">ID</th>
+                    <th style="width: 18%;">Field</th>
+                    <th style="width: 16%;">Crop</th>
+                    <th style="width: 18%;">Harvest Date</th>
+                    <th style="width: 14%;">Actual Yield</th>
+                    <th style="width: 12%;">Quality</th>
+                    <th style="width: 16%; text-align: right; white-space: nowrap;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in harvests %}
+                <tr>
+                    <td data-label="ID" style="font-weight: 700; color: var(--farm-text-muted);">#{{ h.id }}</td>
+                    <td data-label="Field" style="font-weight: 600; color: var(--farm-forest);">
+                        <i class="bi bi-map" style="margin-right: 0.35rem; color: var(--farm-text-muted);"></i>
+                        {{ h.field_name }}
+                    </td>
+                    <td data-label="Crop" style="font-weight: 600; color: var(--farm-emerald);">
+                        <i class="bi bi-tree" style="margin-right: 0.35rem; color: var(--farm-sage);"></i>
+                        {{ h.crop_name }}
+                    </td>
+                    <td data-label="Harvest Date" style="color: var(--farm-text-muted); white-space: nowrap;">
+                        <i class="bi bi-calendar3" style="margin-right: 0.4rem; font-size: 0.85rem;"></i>
+                        {{ h.harvest_date }}
+                    </td>
+                    <td data-label="Actual Yield" style="white-space: nowrap;">
+                        <span class="metric-value">{{ h.actual_yield_tons }}</span><span class="metric-unit">tons</span>
+                    </td>
+                    <td data-label="Quality">
+                        <span class="quality-indicator" title="Quality Rating: {{ h.quality_rating }} / 5">
+                            {% for i in range(h.quality_rating) %}
+                                <i class="bi bi-star-fill"></i>
+                            {% endfor %}
+                            {% for i in range(5 - h.quality_rating) %}
+                                <i class="bi bi-star" style="opacity: 0.25;"></i>
+                            {% endfor %}
+                        </span>
+                    </td>
+                    <td data-label="Actions" style="width: 16%;">
+                        <div class="action-container" style="justify-content: flex-end; white-space: nowrap;">
+                            <a href="/harvests/{{ h.id }}/edit" role="button" class="secondary action-btn" title="Edit Harvest Record">
+                                <i class="bi bi-pencil-square"></i> <span>Edit</span>
+                            </a>
+                            <form action="/harvests/{{ h.id }}/delete" method="post" class="action-form">
+                                <button type="submit" class="contrast action-btn" onclick="return confirm('Are you sure you want to delete this harvest record?')" title="Delete Harvest Record">
+                                    <i class="bi bi-trash-fill"></i> <span>Delete</span>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">No harvests registered. Record a new harvest to build out your agricultural history ledger.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </article>
 {% endblock %}
+
