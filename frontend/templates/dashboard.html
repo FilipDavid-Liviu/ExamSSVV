@@ -66,7 +66,7 @@
             </thead>
             <tbody>
                 {% for row in report %}
-                {% set percentage = (row.total_yield / vars.max_yield) * 100 %}
+                {% set percentage = (row.total_yield / vars.total_yield * 100) if vars.total_yield > 0 else 0 %}
                 <tr>
                     <td style="font-weight: 600; color: var(--farm-forest);">
                         <i class="bi bi-tree" style="margin-right: 0.4rem; color: var(--farm-sage);"></i>
